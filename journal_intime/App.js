@@ -3,13 +3,16 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import AddEntryScreen from './screens/AddEntryScreen';
 import EntryDetailsScreen from './screens/EntryDetailScreen';
+import HomeScreen from './screens/HomeScreen';
+import { StatusBar } from 'expo-status-bar';
 
 const Stack = createStackNavigator();
 
-export default function App() {
+const App = () => {
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="AddEntry">
+      <Stack.Navigator initialRouteName="Home">
+        <Stack.Screen name="Home" component={HomeScreen} />
         <Stack.Screen 
           name="AddEntry" 
           component={AddEntryScreen} 
@@ -24,3 +27,14 @@ export default function App() {
     </NavigationContainer>
   );
 }
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#fff',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+});
+
+export default App;
+

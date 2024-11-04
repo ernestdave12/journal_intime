@@ -10,7 +10,6 @@ export default function HomeScreen({ navigation }) {
     try {
       const savedNotes = await AsyncStorage.getItem('journalEntries');
       const parsedNotes = savedNotes ? JSON.parse(savedNotes) : [];
-      console.log('Entrées récupérées:', parsedNotes); // Debug log
       setNotes(parsedNotes);
     } catch (error) {
       console.error('Erreur lors de la récupération des notes:', error);

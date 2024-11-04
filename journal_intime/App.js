@@ -5,6 +5,8 @@ import AddEntryScreen from './screens/AddEntryScreen';
 import EntryDetailsScreen from './screens/EntryDetailScreen';
 import HomeScreen from './screens/HomeScreen';
 import { StatusBar } from 'expo-status-bar';
+import { StyleSheet } from 'react-native';
+
 
 const Stack = createStackNavigator();
 

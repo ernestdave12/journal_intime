@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, Button, StyleSheet, Alert } from 'react-native';
+import { View, Text, TextInput, Button, StyleSheet } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export default function AddEntryScreen({ navigation }) {
@@ -24,27 +24,12 @@ export default function AddEntryScreen({ navigation }) {
 
       // Sauvegarder les entrées mises à jour
       await AsyncStorage.setItem('journalEntries', JSON.stringify(entries));
-      console.log('Entrée sauvegardée:', entries);
+      console.log('Entrée sauvegardée:', entry); // Pour déboguer
 
       // Naviguer vers la page d'accueil
       navigation.navigate('Home');
     } catch (error) {
       console.error('Erreur lors de la sauvegarde de l\'entrée:', error);
-    }
-  };
-
-  const showEntries = async () => {
-    try {
-      const entries = await AsyncStorage.getItem('journalEntries');
-      const parsedEntries = entries ? JSON.parse(entries) : [];
-      console.log('Entrées récupérées:', parsedEntries);
-      if (parsedEntries.length > 0) {
-        Alert.alert('Entrées du journal', JSON.stringify(parsedEntries, null, 2));
-      } else {
-        Alert.alert('Aucune entrée trouvée');
-      }
-    } catch (error) {
-      console.error('Erreur lors de la récupération des entrées:', error);
     }
   };
 
@@ -74,7 +59,6 @@ export default function AddEntryScreen({ navigation }) {
         multiline
       />
       <Button title="Enregistrer" onPress={handleSave} />
-      <Button title="Voir les entrées" onPress={showEntries} />
     </View>
   );
 }

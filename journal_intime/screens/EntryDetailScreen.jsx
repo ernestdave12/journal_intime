@@ -8,17 +8,17 @@ export default function EntryDetailsScreen({ route, navigation }) {
   // Function to delete the entry
   const deleteEntry = async () => {
     try {
+      console.log('Tentative de suppression de l\'entrée avec ID:', entryId); // Debug log
       const existingEntries = await AsyncStorage.getItem('journalEntries');
-      const entries = existingEntries ? JSON.parse(existingEntries) : [];
+      console.log('Entrées existantes avant suppression:', existingEntries); // Debug log
 
-      // Filter out the entry to delete
+      const entries = existingEntries ? JSON.parse(existingEntries) : [];
       const updatedEntries = entries.filter(entry => entry.id !== entryId);
 
-      // Save the updated list
+      console.log('Entrées mises à jour après suppression:', updatedEntries); // Debug log
       await AsyncStorage.setItem('journalEntries', JSON.stringify(updatedEntries));
-      Alert.alert('Succès', 'Entrée supprimée.');
       
-      // Navigate back after deletion
+      Alert.alert('Succès', 'Entrée supprimée.');
       navigation.navigate('Home');
     } catch (error) {
       console.error('Erreur lors de la suppression de l\'entrée:', error);

@@ -10,6 +10,7 @@ export default function HomeScreen({ navigation }) {
     try {
       const savedNotes = await AsyncStorage.getItem('journalEntries');
       const parsedNotes = savedNotes ? JSON.parse(savedNotes) : [];
+      console.log('Entrées récupérées:', parsedNotes); // Debug log
       setNotes(parsedNotes);
     } catch (error) {
       console.error('Erreur lors de la récupération des notes:', error);
@@ -18,8 +19,9 @@ export default function HomeScreen({ navigation }) {
 
   // Charger les notes une fois au montage du composant
   useEffect(() => {
-    loadNotes();
-  }, []);
+    const unsubscribe = navigation.addListener('focus', loadNotes);
+    return unsubscribe;
+  }, [navigation]);
 
   // Affichage de chaque note dans un composant
   const renderNote = ({ item }) => (
@@ -36,16 +38,6 @@ export default function HomeScreen({ navigation }) {
     >
       <Text style={styles.noteTitle}>{item.title}</Text>
       <Text style={styles.noteDate}>{item.date}</Text>
-      <Button
-        title="Détail"
-        onPress={() =>
-          navigation.navigate('EntryDetails', {
-            entryId: item.id,
-            entryTitle: item.title,
-            entryContent: item.content,
-          })
-        }
-      />
     </TouchableOpacity>
   );
 

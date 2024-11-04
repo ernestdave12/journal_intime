@@ -1,14 +1,20 @@
+import React from 'react';
+import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
-import AddEntryScreen from './screens/AddEntryScreen';
-import HomeScreen from './screens/HomeScreen';
+import AddEntryScreen from './screens/AddEntryScreen'; 
 
 const Stack = createStackNavigator();
 
-function AppNavigator() {
+export default function App() {
   return (
-    <Stack.Navigator>
-      <Stack.Screen name="Home" component={HomeScreen} />
-      <Stack.Screen name="AddEntry" component={AddEntryScreen} />
-    </Stack.Navigator>
+    <NavigationContainer>
+      <Stack.Navigator initialRouteName="AddEntry">
+        <Stack.Screen 
+          name="AddEntry" 
+          component={AddEntryScreen} 
+          options={{ title: 'Ajouter une Entrée' }} 
+        />
+      </Stack.Navigator>
+    </NavigationContainer>
   );
 }
